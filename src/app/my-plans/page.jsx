@@ -8,11 +8,11 @@ const PlanePage = () => {
 
     const [savedExercises, setSavedExercises] = useState([]);
     const [planExercises, setPlanExercises] = useState([]);
-n
+
     useEffect(() => {
         const getExercise = async () => {
             try {
-                const response = await fetch("/allData.json");
+                const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/allData.json`);
                 const data = await response.json();
 
                 setSavedExercises(data);

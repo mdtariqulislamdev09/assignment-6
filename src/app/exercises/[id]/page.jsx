@@ -1,15 +1,19 @@
 import SavedButton from '@/component/exerciseDetails/SavedButton';
 import TodaysPlanButton from '@/component/exerciseDetails/TodaysPlanButton';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 const getExercise = async () => {
-    const response = await fetch("http://localhost:3000/allData.json")
-    const data = await response.json();
-    return data;
+    try{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/allData.json`);
+        const data = await response.json();
+        return data;
+    }catch(error){
+        console.error("Error fetching exercise data:", error);
+        return [];
+    }
 }
-
+    
 const ExerciseDetails = async({ params }) => {
     const {id} = await params;
     const exerciseData =await getExercise();
