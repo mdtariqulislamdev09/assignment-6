@@ -5,6 +5,7 @@ import ExerciseCard from "@/components/ExerciseCard";
 import { ExercisesContext } from "@/context/ExercisesContext";
 
 
+
 const MyPlan = () => {
   const { saved, plan } = useContext(ExercisesContext);
 
