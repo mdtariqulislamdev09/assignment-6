@@ -3,7 +3,11 @@ import ExerciseCard from '../shared/ExerciseCard';
 
 const getExercise = async () => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/allData.json`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/allData.json`,
+            {
+                cache: "no-store",
+            }
+        );
         const data = await response.json();
         return data;
     } catch (error) {
