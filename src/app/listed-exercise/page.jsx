@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useContext, useState } from "react";
-import ExerciseCard from "@/components/ExerciseCard";
+
 import { ExercisesContext } from "@/context/ExercisesContext";
+import ExerciseCard from "@/component/shared/ExerciseCard";
 
 
 
 const MyPlan = () => {
   const { saved, plan } = useContext(ExercisesContext);
-
   const [sortBy, setSortBy] = useState("duration");
 
   const sortExercises = (exercises) => {
@@ -30,9 +30,11 @@ const MyPlan = () => {
 
     return sortedExercises;
   };
-
-  const sortedPlan = sortExercises(plan);
-  const sortedSaved = sortExercises(saved);
+  // useEffect(() => {
+  //   const sorted = sortExercises(plan);
+  //   setSortedPlan(sorted);
+  // }, [plan, sortBy]);
+  // const sortedSaved = sortExercises(saved);
 
   return (
     <main className="min-h-screen bg-[#090A0D] text-white">
@@ -55,7 +57,7 @@ const MyPlan = () => {
             </p>
 
             <p className="mt-2 text-4xl font-extrabold text-[#C2F800]">
-              {plan.length}
+              {plan?.length}
             </p>
           </div>
 
@@ -65,7 +67,7 @@ const MyPlan = () => {
             </p>
 
             <p className="mt-2 text-4xl font-extrabold">
-              {plan.reduce(
+              {plan?.reduce(
                 (total, exercise) => total + exercise.duration,
                 0
               )}
@@ -78,7 +80,7 @@ const MyPlan = () => {
             </p>
 
             <p className="mt-2 text-4xl font-extrabold">
-              {plan.reduce(
+              {plan?.reduce(
                 (total, exercise) =>
                   total + exercise.caloriesBurned,
                 0
@@ -108,8 +110,8 @@ const MyPlan = () => {
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 
-          {sortedPlan.length > 0 ? (
-            sortedPlan.map((exercise) => (
+          {plan?.length > 0 ? (
+            plan.map((exercise) => (
               <ExerciseCard
                 key={exercise.id}
                 exercise={exercise}
